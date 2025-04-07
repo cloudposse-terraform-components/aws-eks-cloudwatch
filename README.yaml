@@ -1,23 +1,26 @@
-name: "template"
+name: "eks/cloudwatch"
 
 # Canonical GitHub repo
-github_repo: "cloudposse-terraform-components/template"
+github_repo: "cloudposse-terraform-components/aws-eks-cloudwatch"
 
 # Short description of this project
 description: |-
-  Description of this component
+  This component installs the CloudWatch Observability chart for EKS. You may want to use this chart rather than the addon if you need to install a priority class with the CloudWatch Observability chart. The addon at this time does not support priority classes with configuration ([reference issue](https://github.com/aws/containers-roadmap/issues/2449)).
 
 usage: |-
-  **Stack Level**: Regional or Test47
+  **Stack Level**: Regional
 
-  Here's an example snippet for how to use this component.
-  
+  For example, to install the CloudWatch Observability chart for EKS:
+
   ```yaml
   components:
     terraform:
-      foo:
+      eks/cloudwatch:
         vars:
-          enabled: true
+          name: eks-cloudwatch
+          # We need to create a priority class for the CloudWatch agent to use
+          # to ensure the cloudwatch-agent and fluent-bit pods are scheduled on all nodes
+          priority_class_enabled: true
   ```
 
 include:
@@ -29,14 +32,17 @@ tags:
   - aws
   - components
   - terraform-components
-  - root
-  - geodesic
-  - reference-implementation
-  - reference-architecture
+  - eks
+  - cloudwatch
+  - observability
+  - monitoring
+  - logging
+  - helm
+  - kubernetes
 
 # Categories of this project
 categories:
-  - terraform-modules/root
+  - terraform-modules/eks
   - terraform-components
 
 # License of this project
@@ -45,8 +51,8 @@ license: "APACHE2"
 # Badges to display
 badges:
   - name: "Latest Release"
-    image: "https://img.shields.io/github/release/cloudposse-terraform-components/template.svg?style=for-the-badge"
-    url: "https://github.com/cloudposse-terraform-components/template/releases/latest"
+    image: "https://img.shields.io/github/release/cloudposse-terraform-components/eks-cloudwatch.svg?style=for-the-badge"
+    url: "https://github.com/cloudposse-terraform-components/eks-cloudwatch/releases/latest"
   - name: "Slack Community"
     image: "https://slack.cloudposse.com/for-the-badge.svg"
     url: "https://slack.cloudposse.com"
