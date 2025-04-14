@@ -9,7 +9,8 @@ locals {
     if local.enabled
   }
 
-  eks_worker_role_names = compact(concat(module.eks.outputs.eks_node_group_role_names, [module.eks.outputs.karpenter_iam_role_name]))
+  # If karpenter is enabled, you may need to add the karpenter iam role to the list of worker roles
+  eks_worker_role_names = compact(module.eks.outputs.eks_node_group_role_names)
 }
 
 module "cloudwatch" {
