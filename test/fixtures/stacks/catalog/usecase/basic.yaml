@@ -5,5 +5,5 @@ components:
         component: eks/cloudwatch
       vars:
         enabled: true
-
+        # required for testing
         kube_exec_auth_role_arn_enabled: false
