@@ -2,7 +2,7 @@ locals {
   enabled = module.this.enabled
 
   priority_class_enabled = local.enabled && var.priority_class_enabled
-  priority_class_name    = module.this.id
+  priority_class_name    = module.local.id
 
   kubernetes_labels = {
     for k, v in merge(module.this.tags, { name = var.kubernetes_namespace }) : k => replace(v, "/", "_")
@@ -11,6 +11,14 @@ locals {
 
   # If karpenter is enabled, you may need to add the karpenter iam role to the list of worker roles
   eks_worker_role_names = compact(module.eks.outputs.eks_node_group_role_names)
+}
+
+module "local" {
+  source  = "cloudposse/label/null"
+  version = "0.25.0"
+
+  name    = length(module.this.name) > 0 ? module.this.name : "cloudwatch"
+  context = module.this.context
 }
 
 module "cloudwatch" {
@@ -41,7 +49,7 @@ module "cloudwatch" {
   values = compact([
     yamlencode(merge(
       {
-        fullnameOverride = module.this.name,
+        fullnameOverride = module.local.name,
         clusterName      = one(module.eks.outputs[*].eks_cluster_id),
         region           = var.region,
       },
@@ -52,7 +60,7 @@ module "cloudwatch" {
     try(length(var.chart_values), 0) == 0 ? null : yamlencode(var.chart_values)
   ])
 
-  context = module.this.context
+  context = module.local.context
 
   depends_on = [kubernetes_priority_class.this]
 }
@@ -73,5 +81,5 @@ resource "kubernetes_priority_class" "this" {
 
   value          = 1000000
   global_default = false
-  description    = "Priority class for the ${module.this.id} EKS CloudWatch Helm chart"
+  description    = "Priority class for the ${module.local.id} EKS CloudWatch Helm chart"
 }
