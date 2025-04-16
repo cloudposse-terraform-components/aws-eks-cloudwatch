@@ -17,3 +17,8 @@ output "cloudwatch_log_group_names" {
   value       = local.cloudwatch_log_group_names
   description = "List of CloudWatch log group names created by the agent"
 }
+
+output "priority_class_name" {
+  value       = local.priority_class_enabled ? local.priority_class_name : ""
+  description = "Name of the priority class"
+}

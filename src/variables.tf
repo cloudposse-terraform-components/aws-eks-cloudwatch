@@ -9,17 +9,23 @@ variable "priority_class_enabled" {
   default     = false
 }
 
-# variable "chart" {
-#   type        = string
-#   description = "The Helm chart to install"
-#   default     = "amazon-cloudwatch-observability"
-# }
-#
-# variable "chart_repository" {
-#   type        = string
-#   description = "Repository URL where to locate the requested chart."
-#   default     = "https://aws-observability.github.io/helm-charts"
-# }
+variable "chart" {
+  type        = string
+  description = "The Helm chart to install"
+  default     = "amazon-cloudwatch-observability"
+}
+
+variable "chart_version" {
+  type        = string
+  description = "The version of the Helm chart to install"
+  default     = "v3.0.0"
+}
+
+variable "chart_repository" {
+  type        = string
+  description = "Repository URL where to locate the requested chart."
+  default     = "https://aws-observability.github.io/helm-charts"
+}
 
 variable "chart_description" {
   type        = string

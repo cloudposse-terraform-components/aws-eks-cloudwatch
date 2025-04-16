@@ -25,12 +25,10 @@ module "cloudwatch" {
   source  = "cloudposse/helm-release/aws"
   version = "0.10.1"
 
-  #chart       = var.chart
-  #repository  = var.chart_repository
-  # The upstream helm chart does not support priority class, which we need to schedule pods on all nodes.
-  # Therefore, we need to fork the chart and add the priority class to the deployment.
-  chart       = "${path.module}/charts/amazon-cloudwatch-observability"
-  description = var.chart_description
+  chart         = var.chart
+  chart_version = var.chart_version
+  repository    = var.chart_repository
+  description   = var.chart_description
 
   wait            = var.wait
   atomic          = var.atomic
@@ -53,7 +51,16 @@ module "cloudwatch" {
         clusterName      = one(module.eks.outputs[*].eks_cluster_id),
         region           = var.region,
       },
-      local.priority_class_enabled ? { priorityClassName = local.priority_class_name } : {}
+      {
+        containerLogs = {
+          fluentBit = {
+            priorityClassName = local.priority_class_enabled ? local.priority_class_name : null
+          }
+        },
+        agent = {
+          priorityClassName = local.priority_class_enabled ? local.priority_class_name : null
+        }
+      }
     )),
 
     # additional values

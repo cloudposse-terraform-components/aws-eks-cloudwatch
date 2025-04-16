@@ -1,9 +1,14 @@
 components:
   terraform:
-    eks/cloudwatch:
+    eks/cloudwatch/basic:
       metadata:
         component: eks/cloudwatch
       vars:
         enabled: true
+        name: eks-cloudwatch-basic
+
+        # Create a priority class for the CloudWatch agent to use to ensure the cloudwatch-agent and fluent-bit pods are scheduled on all nodes
+        priority_class_enabled: true
+
         # required for testing
         kube_exec_auth_role_arn_enabled: false
