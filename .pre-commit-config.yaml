@@ -21,6 +21,8 @@ repos:
 
       # YAML
       - id: check-yaml  # checks yaml files for parseable syntax.
+        exclude: '^src/charts/amazon-cloudwatch-observability/'
+
 
   - repo: https://github.com/antonbabenko/pre-commit-terraform
     rev: v1.81.0
