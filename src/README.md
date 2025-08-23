@@ -1,15 +1,22 @@
 ---
 tags:
-  - component/eks/cloudwatch
-  - layer/eks
-  - provider/aws
-  - provider/helm
+  - terraform
+  - terraform-modules
+  - aws
+  - components
+  - terraform-components
+  - eks
+  - cloudwatch
+  - observability
+  - monitoring
+  - logging
+  - helm
+  - kubernetes
 ---
 
-# Component: `eks/cloudwatch`
+# Component: `cloudwatch`
 
-This component installs the CloudWatch Observability chart for EKS. You may want to use this chart rather than the addon if you need to install a priority class with the CloudWatch Observability chart. The addon at this time does not support priority classes with configuration ([reference issue](https://github.com/aws/containers-roadmap/issues/2449)).
-
+This component installs the CloudWatch Observability chart for EKS. You may want to use this chart rather than the addon if you need to install a priority class with the CloudWatch Observability chart. The addon at this time does not support priority classes with configuration (see References for details).
 ## Usage
 
 **Stack Level**: Regional
@@ -27,8 +34,8 @@ components:
         priority_class_enabled: true
 ```
 
-<!-- prettier-ignore-start -->
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+
+<!-- markdownlint-disable -->
 ## Requirements
 
 | Name | Version |
@@ -118,7 +125,21 @@ components:
 | <a name="output_cloudwatch_log_group_names"></a> [cloudwatch\_log\_group\_names](#output\_cloudwatch\_log\_group\_names) | List of CloudWatch log group names created by the agent |
 | <a name="output_metadata"></a> [metadata](#output\_metadata) | Block status of the deployed release |
 | <a name="output_priority_class_name"></a> [priority\_class\_name](#output\_priority\_class\_name) | Name of the priority class |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-<!-- prettier-ignore-end -->
+<!-- markdownlint-restore -->
 
-[<img src="https://cloudposse.com/logo-300x69.svg" height="32" align="right"/>](https://cpco.io/component)
+
+
+## References
+
+
+- [Cloud Posse Documentation](https://docs.cloudposse.com) - Complete documentation for the Cloud Posse solution
+
+- [Reference Architectures](https://cloudposse.com/) - Launch effortlessly with our turnkey reference architectures, built either by your team or ours.
+
+- [AWS containers-roadmap #2449](https://github.com/aws/containers-roadmap/issues/2449) - 
+
+
+
+
+[<img src="https://cloudposse.com/logo-300x69.svg" height="32" align="right"/>](https://cpco.io/homepage?utm_source=github&utm_medium=readme&utm_campaign=cloudposse-terraform-components/aws-eks-cloudwatch&utm_content=)
+
