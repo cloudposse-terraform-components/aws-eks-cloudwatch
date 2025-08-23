@@ -1,12 +1,9 @@
-name: "eks/cloudwatch"
-
+name: "eks-cloudwatch"
 # Canonical GitHub repo
 github_repo: "cloudposse-terraform-components/aws-eks-cloudwatch"
-
 # Short description of this project
 description: |-
-  This component installs the CloudWatch Observability chart for EKS. You may want to use this chart rather than the addon if you need to install a priority class with the CloudWatch Observability chart. The addon at this time does not support priority classes with configuration ([reference issue](https://github.com/aws/containers-roadmap/issues/2449)).
-
+  This component installs the CloudWatch Observability chart for EKS. You may want to use this chart rather than the addon if you need to install a priority class with the CloudWatch Observability chart. The addon at this time does not support priority classes with configuration (see References for details).
 usage: |-
   **Stack Level**: Regional
 
@@ -22,10 +19,6 @@ usage: |-
           # to ensure the cloudwatch-agent and fluent-bit pods are scheduled on all nodes
           priority_class_enabled: true
   ```
-
-include:
-  - "docs/terraform.md"
-
 tags:
   - terraform
   - terraform-modules
@@ -39,15 +32,12 @@ tags:
   - logging
   - helm
   - kubernetes
-
 # Categories of this project
 categories:
   - terraform-modules/eks
   - terraform-components
-
 # License of this project
 license: "APACHE2"
-
 # Badges to display
 badges:
   - name: "Latest Release"
@@ -56,7 +46,6 @@ badges:
   - name: "Slack Community"
     image: "https://slack.cloudposse.com/for-the-badge.svg"
     url: "https://slack.cloudposse.com"
-
 references:
   - name: "Cloud Posse Documentation"
     description: "Complete documentation for the Cloud Posse solution"
@@ -64,13 +53,14 @@ references:
   - name: "Reference Architectures"
     description: "Launch effortlessly with our turnkey reference architectures, built either by your team or ours."
     url: "https://cloudposse.com/"
-
+  - name: "AWS containers-roadmap #2449"
+    description: ""
+    url: "https://github.com/aws/containers-roadmap/issues/2449"
 related:
-- name: "Cloud Posse Terraform Modules"
-  description: Our collection of reusable Terraform modules used by our reference architectures.
-  url: "https://docs.cloudposse.com/modules/"
-- name: "Atmos"
-  description: "Atmos is like docker-compose but for your infrastructure"
-  url: "https://atmos.tools"
-
+  - name: "Cloud Posse Terraform Modules"
+    description: Our collection of reusable Terraform modules used by our reference architectures.
+    url: "https://docs.cloudposse.com/modules/"
+  - name: "Atmos"
+    description: "Atmos is like docker-compose but for your infrastructure"
+    url: "https://atmos.tools"
 contributors: [] # If included generates contribs
